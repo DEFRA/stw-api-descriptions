@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: Border Control Posts API
+  version: 1.0.0
+
+paths:
+  /border-control-posts:
+    get:
+      description: Get all Border Control Posts
+      parameters:
+        - in: query
+          name: countries
+          description: Country codes
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: certificateTypes
+          description: Certificate types
+          schema:
+            type: array
+            items:
+              type: string
+        - name: categories
+          in: query
+          description: Approved categories
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BorderControlPost"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+  /border-control-posts/{id}:
+    get:
+      description: Get Border Control Post by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+            description: Unique identifier of the Border Control Post
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BorderControlPost"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+        404:
+          $ref: "./common.yaml#/components/responses/NotFound"
+
+components:
+  schemas:
+    BorderControlPost:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the Border Control Post
+        name:
+          type: string
+          description: Name of the Border Control Post
+        code:
+          type: string
+          description: Code associated with the Border Control Post
+        categories:
+          type: array
+          description: Approved categories for the Border Control Post
+          items:
+            type: string
+        certificateTypes:
+          type: array
+          description: Certificate types for the Border Control Post
+          items:
+            type: string
+        address:
+          type: string
+          description: Physical address of the Border Control Post
+        telephone:
+          type: string
+          description: Telephone number of the Border Control Post
+        fax:
+          type: string
+          description: Fax number of the Border Control Post
+        email:
+          type: string
+          format: email
+          description: Email address of the Border Control Post
+        contact:
+          type: string
+          description: Name of the contact associated with the Border Control Post
+        countryCode:
+          type: string
+          description: Country code of the location of the Border Control Post
