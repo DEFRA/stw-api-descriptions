@@ -52,9 +52,7 @@ paths:
           name: id
           required: true
           schema:
-            type: string
-            format: uuid
-            description: Unique identifier of the Border Control Post
+            $ref: "#/components/schemas/Id"
       responses:
         200:
           description: Successful response
@@ -70,16 +68,36 @@ paths:
           $ref: "./common.yaml#/components/responses/Forbidden"
         404:
           $ref: "./common.yaml#/components/responses/NotFound"
+  /border-control-posts/{id}/control-points:
+    get:
+      description: Get all Control Points for a Border Control Post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/Id"
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./control-point.yaml#/components/schemas/ControlPoint"
 
 components:
   schemas:
+    Id:
+      type: string
+      format: uuid
+      description: Unique identifier of the Border Control Post
     BorderControlPost:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
-          description: Unique identifier of the Border Control Post
+          $ref: "#/components/schemas/Id"
         name:
           type: string
           description: Name of the Border Control Post
