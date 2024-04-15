@@ -1,0 +1,125 @@
+openapi: 3.1.0
+info:
+  title: Economic Operator API
+  version: 1.0.0
+  
+paths:
+  /economic-operators:
+    get:
+      description: Get all Economic Operators
+      responses: 
+        200:
+          description: Successful response
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EconomicOperator"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+          
+components: 
+  schemas:
+    EconomicOperator:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Identifier for each Economic Operator
+        sourceIdentifier:
+          type: string
+          description: Identifier of the source system
+        masterType:
+          type: string
+          description: The master type of the EO - importer, exporter, transporter, controlled destination, organisation branch address
+        status:
+          type: string
+          description: Status indicating the state of the EO
+        companyName:
+          type: string
+          description: Name of the company
+        individualName:
+          type: string
+          description: Name of the individual
+        approvalNumber:
+          type: string
+          description: Approval Number which identifies an Economic Operator unambiguously per type of organisation per country. Assigned by Defra, when an Operator is approved
+        otherIdentifier:
+          type: string
+          description: Other identifier for the operator
+        organisationId:
+          type: string
+          description: Identifier for the organisation
+        postalZipCode:
+          type: string
+          description: Postal or ZIP code of the address
+        addressLine1:
+          type: string
+          description: Address line 1
+        addressLine2:
+          type: string
+          description: Address line 2
+        addressLine3:
+          type: string
+          description: Address line 3
+        city:
+          type: string
+          description: City of the address
+        countryIsoCode:
+          type: string
+          description: ISO code for the country
+        email:
+          type: string
+          description: Email address of the operator
+        ukTelephone:
+          type: string
+          description: UK telephone number
+        intlTelCountryCode:
+          type: string
+          description: International telephone country code
+        intlTelSubscriberNumber:
+          type: string
+          description: International telephone subscriber number
+        userOrganisationId:
+          type: string
+          description: Identifier for the user organisation
+        userId:
+          type: string
+          description: Identifier for the user
+        telephone:
+          type: string
+          description: Telephone number of the operator
+        effectiveFromDate:
+          type: string
+          format: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: string
+          format: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last modification
+        changeReason:
+          type: string
+          description: Reason for the change to the record
