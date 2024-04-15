@@ -93,10 +93,12 @@ components:
           type: string
           description: Identifier for the user
         effectiveFromDate:
-          type: date
+          type: string
+          format: date
           description: Start date of the validity period for the record
         effectiveToDate:
-          type: date
+          type: string
+          format: date
           description: End date of the validity period for the record
         isActive:
           type: boolean
@@ -105,13 +107,15 @@ components:
           type: string
           description: User who created the record
         createdDate:
-          type: datetime
+          type: string
+          format: date-time
           description: Timestamp of when the record was created
         lastModifiedBy:
           type: string
           description: User who last modified the record
         lastModifiedDate:
-          type: datetime
+          type: string
+          format: date-time
           description: Timestamp of the last modification of the record
         changeReason:
           type: string
