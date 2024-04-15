@@ -7,28 +7,6 @@ paths:
   /border-control-posts:
     get:
       description: Get all Border Control Posts
-      parameters:
-        - in: query
-          name: countries
-          description: Country codes
-          schema:
-            type: array
-            items:
-              type: string
-        - in: query
-          name: certificateTypes
-          description: Certificate types
-          schema:
-            type: array
-            items:
-              type: string
-        - name: categories
-          in: query
-          description: Approved categories
-          schema:
-            type: array
-            items:
-              type: string
       responses:
         200:
           description: Successful response
@@ -44,30 +22,6 @@ paths:
           $ref: "./common.yaml#/components/responses/Unauthorized"
         403:
           $ref: "./common.yaml#/components/responses/Forbidden"
-  /border-control-posts/{id}:
-    get:
-      description: Get Border Control Post by ID
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            $ref: "#/components/schemas/Id"
-      responses:
-        200:
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BorderControlPost"
-        400:
-          $ref: "./common.yaml#/components/responses/BadRequest"
-        401:
-          $ref: "./common.yaml#/components/responses/Unauthorized"
-        403:
-          $ref: "./common.yaml#/components/responses/Forbidden"
-        404:
-          $ref: "./common.yaml#/components/responses/NotFound"
   /border-control-posts/{id}/control-points:
     get:
       description: Get all Control Points for a Border Control Post
@@ -98,6 +52,9 @@ components:
       properties:
         id:
           $ref: "#/components/schemas/Id"
+        sourceIdentifier:
+          type: string
+          description: Identifier of the source system
         name:
           type: string
           description: Name of the Border Control Post
@@ -133,3 +90,31 @@ components:
         countryCode:
           type: string
           description: Country code of the location of the Border Control Post
+        effectiveFromDate:
+          type: string
+          format: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: string
+          format: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last modification of the record
+        changeReason:
+          type: string
+          description: Reason for the change to the record

@@ -22,41 +22,15 @@ paths:
           $ref: "./common.yaml#/components/responses/Unauthorized"
         403:
           $ref: "./common.yaml#/components/responses/Forbidden"
-  /control-points/{id}:
-    get:
-      description: Get Control Point by ID
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            $ref: "#/components/schemas/Id"
-      responses:
-        200:
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ControlPoint"
-        400:
-          $ref: "./common.yaml#/components/responses/BadRequest"
-        401:
-          $ref: "./common.yaml#/components/responses/Unauthorized"
-        403:
-          $ref: "./common.yaml#/components/responses/Forbidden"
-        404:
-          $ref: "./common.yaml#/components/responses/NotFound"
 
 components:
   schemas:
-    Id:
-      type: integer
-      description: Unique identifier of the Control Point
     ControlPoint:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          type: integer
+          description: Unique identifier of the Control Point
         organisationId:
           type: integer
           description: Identifier for the organisation managing the Control Point
