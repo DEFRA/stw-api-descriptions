@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Countries API
+  version: 1.0.0
+
+paths:
+  /countries:
+    get:
+      description: Get all countries
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Country"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+  /countries/{id}:
+    get:
+      description: Get country by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/Id"
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Country"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+        404:
+          $ref: "./common.yaml#/components/responses/NotFound"
+
+components:
+  schemas:
+    Id:
+      type: string
+      format: uuid
+      description: Unique identifier of the country
+    Country:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          type: string
+          description: Name
+        isoCodeAlpha2:
+          type: string
+          description: ISO alpha-2 country code
+        isoCodeAlpha3:
+          type: string
+          description: ISO alpha-3 country code
+        isoNumeric:
+          type: integer
+          description: ISO numeric country code
+        isEu:
+          type: boolean
+          description: Is the country in the European Union
+        locationType:
+          type: string
+          description: Location Type
