@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Approved Establishments API
+  version: 1.0.0
+
+paths:
+  /approved-establishments:
+    get:
+      description: Get all Approved Establishments
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApprovedEstablishment"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+
+components:
+  schemas:
+    ApprovedEstablishment:
+      type: object
+      properties:
+        establishmentId:
+          type: string
+          format: uuid
+          description: Unique identifier for the establishment
+        establishmentName:
+          type: string
+          description: Name of the establishment
+        approvalNumber:
+          type: string
+          description: Unique identifier for approval of the establishment
+        street:
+          type: string
+          description: Street address of the establishment
+        city:
+          type: string
+          description: City where the establishment is located
+        country: 
+          type: string
+          format: uuid
+          description: The country the approved establishment is in
+        region:
+          type: string
+          description: Geographical region or area within the country
+        activityId:
+          type: string
+          format: uuid
+          description: Details of activities conducted at the establishment
+        remarkId:
+          type: string
+          format: uuid
+          description: Additional notes or comments about the establishment
+        dateOfApproval:
+          type: string
+          format: date
+          description: Date when the establishment was approved
+        publicationDate:
+          type: string
+          format: date
+          description: Date when the establishment information was published
+        section:
+          type: string
+          format: uuid
+          description: Section identifier referencing the section table
