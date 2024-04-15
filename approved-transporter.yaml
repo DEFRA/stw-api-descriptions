@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Approved Transporter API
+  version: 1.0.0
+
+paths:
+  /approved-transporters:
+    get:
+      description: Get all Approved Transporters
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApprovedTransporter"
+
+components:
+  schemas:
+    ApprovedTransporter:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the Approved Transporter
+        sourceIdentifier:
+          type: string
+          description: Identifier of the source system
+        type:
+          type: string
+          description: (Sub) Type or category of the Approved Transporter
+        masterType:
+          type: string
+          description: Master type of the Approved Transporter
+        status:
+          type: string
+          description: Status of the Approved Transporter
+        companyName:
+          type: string
+          description: Name of the Approved Transporter
+        individualName:
+          type: string
+          description: Name of the individual at the Approved Transporter
+        approvalNumber:
+          type: string
+          description: Approval Number which identifies an Approved Transporter unambiguously per type of organisation per country, assigned by Defra when an Operator is approved
+        otherIdentifier:
+          type: string
+          description: Other identifier for the Approved Transporter
+        organisationId:
+          type: string
+          description: Organisation ID for the Approved Transporter
+        postalZipCode:
+          type: string
+          description: Postal or ZIP code
+        addressLine1:
+          type: string
+          description: Address line 1
+        addressLine2:
+          type: string
+          description: Address line 2
+        addressLine3:
+          type: string
+          description: Address line 3
+        city:
+          type: string
+          description: City or town
+        countryIsoCode:
+          type: string
+          description: ISO alpha-2 country code
+        email:
+          type: string
+          description: Email address
+        ukTelephone:
+          type: string
+          description: UK telephone number
+        internationalTelephoneCountryCode:
+          type: string
+          description: International telephone country code
+        internationalTelephoneSubscriberNumber:
+          type: string
+          description: International telephone subscriber number
+        telephone:
+          type: string
+          description: Telephone number
+        userOrganisationId:
+          type: string
+          description: Identifier for the user organisation
+        userId:
+          type: string
+          description: Identifier for the user
+        effectiveFromDate:
+          type: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: datetime
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: datetime
+          description: Timestamp of the last modification of the record
+        changeReason:
+          type: string
+          description: Reason for the change to the record
