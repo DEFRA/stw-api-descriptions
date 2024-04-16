@@ -40,6 +40,12 @@ paths:
                 type: array
                 items:
                   $ref: "./control-point.yaml#/components/schemas/ControlPoint"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
 
 components:
   schemas:
