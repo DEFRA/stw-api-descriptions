@@ -46,6 +46,8 @@ paths:
           $ref: "./common.yaml#/components/responses/Unauthorized"
         403:
           $ref: "./common.yaml#/components/responses/Forbidden"
+        404:
+          $ref: "./common.yaml#/components/responses/NotFound"
 
 components:
   schemas:
