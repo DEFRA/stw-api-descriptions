@@ -1,0 +1,67 @@
+openapi: 3.1.0
+info:
+  title: UK Regions API
+  version: 1.0.0
+
+paths:
+  /uk-regions:
+    get:
+      description: Get all UK Regions
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UkRegion"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+
+components:
+  schemas:
+    UkRegion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the UK Region
+        name:
+          type: string
+          description: Name of the UK Region
+        code:
+          type: string
+          description: Code uniquely identifying the UK Region
+        effectiveFromDate:
+          type: string
+          format: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: string
+          format: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last modification of the record
+        changeReason:
+          type: string
+          description: Reason for the change to the record
