@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: Border Control Posts API
+  version: 1.0.0
+
+paths:
+  /border-control-posts:
+    get:
+      description: Get all Border Control Posts
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BorderControlPost"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+  /border-control-posts/{id}/control-points:
+    get:
+      description: Get all Control Points for a Border Control Post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/Id"
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./control-point.yaml#/components/schemas/ControlPoint"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+        404:
+          $ref: "./common.yaml#/components/responses/NotFound"
+
+components:
+  schemas:
+    Id:
+      type: string
+      format: uuid
+      description: Unique identifier of the Border Control Post
+    BorderControlPost:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        sourceIdentifier:
+          type: string
+          description: Identifier of the source system
+        name:
+          type: string
+          description: Name of the Border Control Post
+        code:
+          type: string
+          description: Code associated with the Border Control Post
+        categories:
+          type: array
+          description: Approved categories for the Border Control Post
+          items:
+            type: string
+        certificateTypes:
+          type: array
+          description: Certificate types for the Border Control Post
+          items:
+            type: string
+        address:
+          type: string
+          description: Physical address of the Border Control Post
+        telephone:
+          type: string
+          description: Telephone number of the Border Control Post
+        fax:
+          type: string
+          description: Fax number of the Border Control Post
+        email:
+          type: string
+          format: email
+          description: Email address of the Border Control Post
+        contact:
+          type: string
+          description: Name of the contact associated with the Border Control Post
+        countryCode:
+          type: string
+          description: Country code of the location of the Border Control Post
+        effectiveFromDate:
+          type: string
+          format: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: string
+          format: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last modification of the record
+        changeReason:
+          type: string
+          description: Reason for the change to the record
