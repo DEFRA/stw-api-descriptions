@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Countries API
+  version: 1.0.0
+
+paths:
+  /countries:
+    get:
+      description: Get all countries
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Country"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+
+components:
+  schemas:
+    Country:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the country
+        sourceIdentifier:
+          type: string
+          description: Identifier of the source system
+        name:
+          type: string
+          description: Name
+        isoCodeAlpha2:
+          type: string
+          description: ISO alpha-2 country code
+        isoCodeAlpha3:
+          type: string
+          description: ISO alpha-3 country code
+        isoNumeric:
+          type: integer
+          description: ISO numeric country code
+        isEu:
+          type: boolean
+          description: Is the country in the European Union
+        locationType:
+          type: string
+          description: Location Type
+        effectiveFromDate:
+          type: string
+          format: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: string
+          format: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last modification of the record
+        changeReason:
+          type: string
+          description: Reason for the change to the record
