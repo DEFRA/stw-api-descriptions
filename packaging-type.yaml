@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: Packaging Type API
+  version: 1.0.0
+
+paths:
+  /packaging-types:
+    get:
+      description: Get all Packaging Types
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PackagingType"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+          
+components:
+  schemas:
+    PackagingType:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Identifier for each Packaging Type
+        sourceIdentifier:
+          type: string
+          description: Identifier of the source system
+        name:
+          type: string
+          description: The name of the Packaging Type
+        code:
+          type: string
+          description: The code assigned to the Packaging Type
+        numericCode:
+          type: string
+          description: 2-digit numeric code value representing the Packaging Type
+        description:
+          type: string
+          description: The description of the Packaging Type
+        effectiveFromDate:
+          type: string
+          format: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: string
+          format: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last modification
+        changeReason:
+          type: string
+          description: Reason for the change to the record
