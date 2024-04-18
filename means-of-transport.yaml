@@ -1,0 +1,40 @@
+openapi: 3.1.0
+info:
+  title: Means of Transport API
+  version: 1.0.0
+
+paths:
+  /means-of-transport:
+    get:
+      description: Get all means of transport
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MeansOfTransport"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+
+components:
+  schemas:
+    MeansOfTransport:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the means of transport
+        type:
+          type: string
+          description: Identifies the type of means of transport used
+        document:
+          type: string
+          description: The document associated with the means of transport
