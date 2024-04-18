@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Unit of Measure API
+  version: 1.0.0
+
+paths:
+  /units-of-measure:
+    get:
+      description: Get all Units of Measure
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitOfMeasure"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+
+components:
+  schemas:
+    UnitOfMeasure:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the Unit of Measure
+        sourceIdentifier:
+          type: string
+          description: Identifier from the source dataset
+        code:
+          type: string
+          description: Unique code assigned to the Unit of Measure
+        name:
+          type: string
+          description: Name of the Unit of Measure
+        symbol:
+          type: string
+          description: Symbol representing the Unit of Measure
+        effectiveFromDate:
+          type: string
+          format: date
+          description: Start date of the validity period for the record
+        effectiveToDate:
+          type: string
+          format: date
+          description: End date of the validity period for the record
+        isActive:
+          type: boolean
+          description: Is the record active
+        createdBy:
+          type: string
+          description: User who created the record
+        createdDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the record was created
+        lastModifiedBy:
+          type: string
+          description: User who last modified the record
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last modification of the record
+        changeReason:
+          type: string
+          description: Reason for the change to the record
