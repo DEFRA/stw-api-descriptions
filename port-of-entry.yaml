@@ -1,0 +1,40 @@
+openapi: 3.1.0
+info:
+  title: Port of Entry API
+  version: 1.0.0
+
+paths:
+  /ports-of-entry:
+    get:
+      description: Get all ports of entry
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PortOfEntry"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+
+components:
+  schemas:
+    PortOfEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for each port of entry
+        code:
+          type: string
+          description: Code assigned to the port of entry
+        name:
+          type: string
+          description: Name of the port of entry
