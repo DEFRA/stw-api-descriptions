@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  title: Approved Establishments API
+  version: 1.0.0
+
+paths:
+  /approved-establishments:
+    get:
+      description: Get all Approved Establishments
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApprovedEstablishment"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+  /approved-establishments/activity:
+    get:
+      description: Get all Approved Establishments Activities
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+  /approved-establishments/remark:
+    get:
+      description: Get all Approved Establishments Remarks
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Remark"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+  /approved-establishments/section:
+    get:
+      description: Get all Approved Establishments Sections
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Section"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+  /approved-establishments/section/chapter:
+    get:
+      description: Get all Approved Establishments Sections Chapters
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Chapter"
+        400:
+          $ref: "./common.yaml#/components/responses/BadRequest"
+        401:
+          $ref: "./common.yaml#/components/responses/Unauthorized"
+        403:
+          $ref: "./common.yaml#/components/responses/Forbidden"
+
+
+components:
+  schemas:
+    ApprovedEstablishment:
+      type: object
+      properties:
+        establishmentId:
+          type: string
+          format: uuid
+          description: Unique identifier for the establishment
+        establishmentName:
+          type: string
+          description: Name of the establishment
+        approvalNumber:
+          type: string
+          description: Unique identifier for approval of the establishment
+        street:
+          type: string
+          description: Street address of the establishment
+        city:
+          type: string
+          description: City where the establishment is located
+        country: 
+          type: string
+          format: uuid
+          description: The country the approved establishment is in
+        region:
+          type: string
+          description: Geographical region or area within the country
+        activityId:
+          type: string
+          format: uuid
+          description: Details of activities conducted at the establishment
+        remarkId:
+          type: string
+          format: uuid
+          description: Additional notes or comments about the establishment
+        dateOfApproval:
+          type: string
+          format: date
+          description: Date when the establishment was approved
+        publicationDate:
+          type: string
+          format: date
+          description: Date when the establishment information was published
+        sectionId:
+          type: string
+          format: uuid
+          description: Section identifier referencing the section table
+    Activity:
+      type: object
+      properties:
+        activityId:
+          type: string
+          format: uuid
+          description: Unique identifier for the activity	
+        activityCode:
+          type: string
+          description: Unique code for the activity	
+        activityName:
+          type: string
+          description: Name of the activity
+    Remark:
+      type: object
+      properties:
+        remarkId:
+          type: string
+          format: uuid
+          description: Unique identifier for the remarks
+        remarkCode:
+          type: string
+          description: Unique code for the Remarks
+        remarkName:
+          type: string
+          description: Name of the Remarks
+    Section:
+      type: object
+      properties:
+        sectionId:
+          type: string
+          format: uuid
+          description: Unique identifier for the section
+        sectionName:
+          type: string
+          description: Name of the section
+        sectionCode:
+          type: string
+          description: Section code
+        chapterId:
+          type: string
+          format: uuid
+          description: Chapter identifier referencing the chapter table
+    Chapter:
+      type: object
+      properties:
+        chapterId:
+          type: string
+          format: uuid
+          description: Unique identifier for the chapter
+        chapterName:
+          type: string
+          description: Name of the chapter
